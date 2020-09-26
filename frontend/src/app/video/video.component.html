@@ -1,0 +1,74 @@
+<vg-player class="video-player" *ngIf="isVideoReady" (onPlayerReady)="onPlayerReady($event)">
+
+        <vg-scrub-bar style="z-index: 1;">
+            <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+            <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
+            
+        </vg-scrub-bar>
+        <vg-buffering></vg-buffering>
+        
+        <vg-controls style="z-index: 1;">
+            <vg-play-pause></vg-play-pause>
+            <vg-playback-button></vg-playback-button>
+    
+            <vg-time-display vgProperty="current" vgFormat="mm:ss"></vg-time-display>
+    
+            <vg-scrub-bar style="pointer-events: none;"></vg-scrub-bar>
+    
+            
+            <vg-time-display vgProperty="total" vgFormat="mm:ss"></vg-time-display>
+    
+            
+            <vg-mute></vg-mute>
+            <vg-quality-selector [bitrates]="dashBitrates"
+                             (onBitrateChange)="b($event)">
+            </vg-quality-selector>
+            <vg-volume></vg-volume>
+    
+            <vg-fullscreen></vg-fullscreen>
+        </vg-controls>
+    
+    <video #media
+        #vgDash="vgDash"
+        [vgMedia]="media"
+        [vgDash]="downloadUrl"
+        
+        id="singleVideo"
+        (onGetBitrates)="dashBitrates = $event"
+        preload = "none">
+
+        <!-- <source [src]="downloadUrl" type="video/mp4" > -->
+    </video>
+</vg-player>
+
+<div class="video-detail-section-1">
+    <a class="video-title">{{title}}</a>
+    <br>
+    <div class="video-statistic-main">
+        <a class="video-count">{{showView}} &#x25CF; {{date | date:"mediumDate"}}</a>
+        <div class="video-statistic-sub">
+            <fa-icon [@likeOrDislike]="likeActive ? 'active' :'inactive' " class="video-count" [icon]="faThumbsUp" (click)="like()"></fa-icon> <a class="video-count" >{{likeCount}}</a>
+            <fa-icon [@likeOrDislike]="dislikeActive ? 'active' :'inactive' " class="video-count" [icon]="faThumbsDown" (click)="dislike()"></fa-icon> <a class="video-count" >{{dislikeCount}}</a>
+        </div>
+    </div>
+</div>
+<div class="video-detail-section-2">
+    <div class ="profile-picture">
+        <img [src]="pict">
+    </div>
+    <div class="video-desc">
+        <a class="name">{{name}}</a><br><br>
+        <a class="description">
+            {{description}}
+        </a>
+    </div>
+    <div class="subscribe">
+        <div class="subscribe-btn" *ngIf="uploader_id != uid">
+            <a> Subscribe </a>
+        </div>
+    </div>
+</div>
+
+<button (click)="b()">Download</button>
+
+

@@ -1,0 +1,114 @@
+<div class="upload-container">
+<div class="details">
+    <div class="title">
+        <span class="details-title"> Title (required)</span>
+        <input (input)="title = $event.target.value" class="title-input" type="text" name="" id="" required [value]="title" (input)="title = $event.target.value" (change)="checkUploadable()">
+    </div>
+    <div class="description">
+        <span class="details-title">Description</span>
+        <textarea class="description-input" style="resize: none;"  (input)="desc = $event.target.value">No Description</textarea>
+    </div>
+    <div class="category">
+        <span class="details-title">Category</span>
+        <select [(ngModel)]="ctg"  #ctrl="ngModel" class="category-select" (change)="checkUploadable()">
+            <option selected [ngValue]=undefined>
+                Choose Category
+            </option>
+            <option *ngFor="let ct of categories" [ngValue]="ct">
+                {{ct.name}}
+            </option>
+        </select>
+    </div>
+    <div class="thumbnail">
+        <span class="details-title">Thumbnail</span>
+        <ngx-dropzone (click) ="removeThumbnail()"[accept]="'image/*'" (change)="onSelect($event)" class="thumbnail-preview">
+            <ngx-dropzone-label>
+                <div>
+                    <h2>Input Thumbnail Here</h2>
+                </div>
+            </ngx-dropzone-label>
+            <ngx-dropzone-image-preview [file]="thumbnail" *ngIf = "thumbnailExists" [removable]="true" (removed)="removeThumbnail()" style="width: 100%; height: 100%;"> 
+                
+            </ngx-dropzone-image-preview>
+        </ngx-dropzone>
+    </div>
+    <div class="restrict">
+        <span>
+            Restrict (Only users 18 years old or older can view video)
+        </span>
+        <div class="restrict-toggler">
+            <span class="restrict-bar" (click)="toggleRestrictedMode()"></span>
+            <span class="restrict-button"(click)="toggleRestrictedMode()" [@restrict] = "restricted ? 'on':'off'"></span>
+        </div>
+    </div>
+    <div class="privacy">
+        Privacy : 
+        <input type="radio" name="privacy" id="" checked (change)="changePrivacy($event)" value="Public">Public
+        <input type="radio" name="privacy" id="" (change)="changePrivacy($event)" value="Private">Private
+    </div>  
+    <div class="premium">
+        Video Type : 
+        <input type="radio" name="premium" id="" value="Free" (change)="changePremium($event)" value="Free" checked>Free
+        <input type="radio" name="premium" id="" value="Premium"  (change)="changePremium($event)" value="Premium" >Premium
+    </div>
+    <div class="publish" style="margin-bottom: 20px;">
+        Publish Time : 
+        <input type="radio" name="publish" id="" (change)="publish()"checked>Now
+        <input type="radio" name="publish" id="" (change)="publish()">Later
+        <div class="publish-later" *ngIf="publishNow==false">
+            <input type="date" name="" id="" (change)="changeDate($event.target.value)" min="{{today | date:'yyyy-MM-dd'}}">
+            <input type="time" name="" id="" (change)="changeTime($event)" min="{{minTime | date:'HH:mm'}}">
+        </div>
+    </div>
+
+</div>
+
+
+<div class="video-preview">
+    <ngx-dropzone accept =".mp4" multiple="false" class="video-dropzone" (change)="update($event)" *ngIf="fileExists==false">
+        <!-- <input type="file" id="upload" style="display:none" (change)="test($event)"> -->
+        <ngx-dropzone-label>Drag or Click here to upload videos</ngx-dropzone-label>
+    </ngx-dropzone>
+    <vg-player *ngIf="fileExists" class="video-dropzone video-player" (onPlayerReady)="fileExists = true">
+        <vg-scrub-bar class="vg-bar">
+            <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+            <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
+        </vg-scrub-bar>
+        <vg-controls>
+            <vg-play-pause></vg-play-pause>
+            <vg-playback-button></vg-playback-button>
+      
+            <vg-time-display vgProperty="left" vgFormat="mm:ss"></vg-time-display>
+      
+            <vg-mute></vg-mute>
+            <vg-volume></vg-volume>
+      
+            <vg-fullscreen></vg-fullscreen>
+            
+        </vg-controls>
+        
+        <video #media [vgMedia]="media" id="singleVideo" preload="auto" *ngIf="a">
+            <source [src]="downloadURL" type="video/mp4">
+        </video>
+    </vg-player>
+    <div class="file-detail">
+        <span>YourJube Link</span>
+        <a>Link</a>
+        <span>File Name</span>
+        <span>{{fileName}}</span>
+    </div>
+    <div class="upload-progress-detail" *ngIf="fileExists">
+        <span>
+            Upload Progress: 
+        </span>
+        <div class="upload-progress">
+            <div class="progress-bar" [style.width]="percentage"></div>
+        </div>
+    </div>
+    <a routerLink="/home">
+        <input type="submit" class="upload-btn" value="Upload" [disabled]="uploadable==false" (click)="finishUpload()">
+    </a>
+</div>
+
+    
+</div>

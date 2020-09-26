@@ -1,0 +1,76 @@
+<div class="side-bar" *ngIf="flyIn" [@flyInOut]>
+    <div  class="side-menu" >
+        <div class="first-section">
+        <a>
+            <img src="../../assets/hamburger-btn.png" class="hamburger-btn" (click)="toggleFlyInOut()">
+        </a>
+        <a>
+            <img src="../../assets/yourjube-light.png" class="logo">
+        </a>
+        </div>
+        <div class="second-section">
+            <div class="home-btn">
+                <img src="../../assets/home.png">
+                <a class ="side-menu-text">Home</a>
+            </div>
+            <div class="home-btn">
+                <img src="../../assets/trending.png">
+                <a class ="side-menu-text">Trending</a>
+            </div>
+            <div class="home-btn">
+                <img src="../../assets/subscriptions.png">
+                <a class ="side-menu-text">Subscriptions</a>
+            </div>
+        </div>
+        <div class="third-section">
+            <div class="side-menu-title">
+                <a class = "side-menu-text-title">Categories</a>
+            </div>
+            <div class="third-section-item">
+                <img src="../../assets/music.png">
+                <a class="side-menu-text">
+                    Music
+                </a>
+            </div>
+            <div class="third-section-item">
+                <img src="../../assets/sports.png">
+                <a class="side-menu-text">
+                    Sport
+                </a>
+            </div>
+            <div class="third-section-item">
+                <img src="../../assets/gaming.png">
+                <a class="side-menu-text">
+                    Gaming
+                </a>
+            </div>
+            <div class="third-section-item">
+                <img src="../../assets/entertainment.png">
+                <a class="side-menu-text">
+                    Entertainment
+                </a>
+            </div>
+            <div class="third-section-item">
+                <img src="../../assets/news.png">
+                <a class="side-menu-text">
+                    News
+                </a>
+            </div>
+            <div class="third-section-item">
+                <img src="../../assets/travel.png">
+                <a class="side-menu-text">
+                    Travel
+                </a>
+            </div>
+        </div>
+        <div class="fourth-section">
+            <a href="https://www.youtube.com/about/" class="side-menu-text links">About Us</a>
+            <a href="https://policies.google.com/privacy?hl=en" class="side-menu-text links">Privacy</a>
+            <a href="https://www.youtube.com/t/terms" class="side-menu-text links">Terms</a>
+            <a href="https://www.youtube.com/t/contact_us" class="side-menu-text links">Contact Us</a>
+        </div>
+    </div>
+    <div class="fly-out" (click)="toggleFlyInOut()">
+        
+    </div>
+</div>

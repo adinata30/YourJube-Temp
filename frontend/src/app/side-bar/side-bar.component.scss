@@ -1,0 +1,121 @@
+
+
+.side-bar{
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top:0px;
+    // overflow: hidden;
+    z-index: 5;
+}
+
+.side-menu{
+    overflow-y: auto;
+    position: fixed;
+    top: 0px;
+    margin-top: 0;
+    width: 16vw;
+    height: 100vh;
+    // background-color: rgba(211,211,211,0.2);
+    background-color: white;
+}
+
+.fly-out{
+    position: fixed;
+    left:16vw;
+    height: 100vh;
+    width: 85vw;
+    opacity: 0.5;
+    background-color: black;
+}
+
+.first-section{
+    // padding-top: 2vh;
+    height: 8vh;
+    display:flex;
+    align-content: center;
+}
+
+.first-section .hamburger-btn{
+    margin-top: 0.5vh;
+    height: 7vh;
+    width: 5vw;
+    cursor: pointer;
+}
+
+.first-section .logo{
+    width:7vw;
+    height:7vh;
+    cursor: pointer;
+}
+.second-section{
+    // padding-top: 2vh;
+    height: 25vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.side-menu > *{
+    border-bottom: 1px solid #E6E6E6;
+}
+
+.third-section{
+    // padding-top: 2vh;
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.third-section-item:hover , .home-btn:hover{
+    cursor: pointer;
+    background-color: rgba(211,211,211,0.5);
+}
+.second-section img, .third-section img{
+    margin-top: 1.5vh;
+    height: 4vh;
+    width: 3.2vw;
+    margin-left: 1.5vw;
+}
+.side-menu-text{
+    position: absolute;
+    margin-left: 2vw;
+    font-size: 1rem;
+    padding-top: 2vh;
+    text-decoration: none;
+}
+.side-menu-title{
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+.fourth-section{
+    display: flex;
+    // flex-wrap: wrap;
+    // height: 5vh;
+    flex-direction: column;
+    justify-content: flex-start;
+    // padding-bottom: 10vh;
+    
+}
+.fourth-section a{
+    margin-left: 3vw;
+    font-size: 1rem;
+    margin: 0;
+    margin-left: 10px;
+    height: 2vh;
+    text-decoration: none;
+    color: black;
+}
+.fourth-section a:last-child{
+    // margin-bottom: auto;
+    // background-color: red;
+}
+.links{
+    position: relative;
+}
+
+a:visited{
+    color: black;
+}

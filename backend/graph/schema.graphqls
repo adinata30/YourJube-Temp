@@ -1,0 +1,358 @@
+
+scalar Json
+scalar Bytea
+scalar Date 
+
+
+type PlaylistContent{
+  playlist_id: ID!
+  video_id: ID!
+  added_date: Date!
+}
+
+
+type PopularContent{
+  popular_id: ID!
+  video_id: ID!
+}
+
+type SessionQueue{
+  session_id: ID!
+  video_id: ID!
+}
+
+type VideoCategory{
+  video_id: ID!
+  category_id: ID!
+}
+
+type Category{
+  id:ID!
+  name:String!
+}
+
+type Comment{
+  id: ID!
+  user_id: Int!
+  replied_id: Int!
+  content: String!
+  post_date:Date!
+}
+
+type LikeOrDislike{
+  user_id: Int!
+  target_id: Int!
+  target_type: String!
+  actions: String!
+  performed_at: Date!
+}
+
+type Playlist{
+  id: ID!
+  user_id: Int!
+  name: String!
+  
+  url: String!
+  type: String!
+  description:String! 
+  created_at: Date!
+  last_updated: Date!
+  total_views: Int!
+}
+
+type Popular{
+  id: ID!
+  category: String!
+  types: String!
+  start_date: Date!
+}
+
+
+type Session{
+  id: ID!
+  ip: String!
+  location: String!
+  type: String!
+  restriction: Boolean!
+}
+
+type Subscriptions{
+  id: ID!
+  user_id: Int!
+  subscribed_id: Int!
+  subscribed_date: Date!
+  notification: Boolean!
+}
+
+type UploadQueue{
+  id: ID!
+  video_id: Int!
+  upload_date: Date!
+}
+
+type User{
+  id: ID!
+  name: String!
+  picture: String!
+  membership_status: String!
+  billing_type: String!
+  membership_exp_date: Date!
+  join_date: Date!
+  email: String!
+  
+}
+
+type Video{
+  id: ID!
+  videos: String!
+  title: String!
+  descriptions: String!
+  uploader_id: Int!
+  label: String!
+  privacy: String!
+  type: String!
+  thumbnail: String!
+  upload_date: Date!
+  location: String!
+  view_count: Int!
+  category:String!
+}
+
+type addedVideo{
+  video: [Video!]!
+  added_date: [Date!]!
+}
+#additional
+type playlistVideoDetail{
+  playlist: Playlist!
+  videos: addedVideo!
+}
+
+type popularVideoDetail{
+  popular: Popular!
+  videos: [Video!]!
+}
+
+type userVideoDetail{
+  user: User!
+  videos: [Video!]!
+}
+
+type queueVideoDetail{
+  session: Session!
+  videos: [Video!]!
+}
+
+type userSubscriptionDetail{
+  user: User!
+  subscriptions: [Subscriptions!]!
+}
+
+type videoDetail{
+  video: Video!
+  user: User!
+  likeCount: Int!
+  dislikeCount: Int!
+
+}
+
+type Query{
+  users: [User!]!
+  comments: [Comment!]!
+  playlists: [Playlist!]!
+  populars: [Popular!]!
+  sessions: [Session!]!
+  subscriptions: [Subscriptions!]!
+  videos: [Video!]!
+  playlistContents: [PlaylistContent!]!
+  popularContents: [PopularContent!]!
+  sessionQueues: [SessionQueue!]!
+  videoCategories: [VideoCategory!]!
+  categories: [Category!]!
+  likesOrDislikes: [LikeOrDislike!]!
+  uploadQueues: [UploadQueue!]!
+  
+
+  #additional
+  getUserByID(id: ID!): User!
+  getPlaylistVideos(id : ID!): playlistVideoDetail!
+  getPopularVideos(id : ID!): popularVideoDetail!
+  getQueueVideos(id : ID!): queueVideoDetail!
+  getUserVideos(id : ID!): userVideoDetail!
+  getVideoDetail(id : ID!): videoDetail!
+  getAllVideoDetail: [videoDetail!]!
+
+  isVideoLikedorDislikedByUser(uid: ID! vid: ID!):[Boolean!]!
+  isCommentLikedorDislikeByUser(uid: ID! cid: ID!):[Boolean!]!
+
+  getTotalVideoLikes(id : ID!): Int!
+  getTotalVideoDislikes(id : ID!): Int!
+  getTotalCommentLikes(id : ID!): Int!
+  getTotalCommentDislikes(id : ID!): Int!
+  
+  getUserSubscriptions(id : ID!):userSubscriptionDetail!
+  
+}
+
+input newComment{
+  user_id: Int!
+  content: String!
+}
+
+
+input newReply{
+  user_id: Int!
+  replied_id: Int!
+  content: String!
+}
+
+input doLikeOrDislike{
+  id: Int!
+  user_id: Int!
+}
+
+input newPlaylist{
+  user_id: Int!
+  name: String!
+  url: String!
+  type: String!
+  description: String!
+}
+
+input newPopularList{
+  category: String!
+  types: String!
+  start_date: Date!
+}
+
+input newPopularVideo{
+  popular_id: ID!
+  video_id: ID!
+}
+
+input addToPlaylist{
+  id: ID!
+  videos: ID!
+}
+
+input increaseView{
+  id:Int!
+}
+
+input createNewSession{
+  ip:String!
+  location:String!
+  type:String!
+}
+
+input addToQueue{
+  session_id:ID!
+  queue: ID!
+}
+
+input newSubscription{
+  user_id: Int!
+  subscribed_id:Int!
+}
+
+input newUploadQueue{
+  video_id: Int!
+  upload_date: Date!
+}
+
+input newUser{
+  name: String!
+  email: String!
+  picture:String!
+}
+
+input changePicture{
+  id:Int!
+  pict: String!
+}
+
+
+
+input newMembership{
+  id:Int!
+  billing_type:String!
+}
+
+input newVideo{
+  video:String!
+  title:String!
+  descriptions:String!
+  label:String!
+  privacy:String!
+  uploader_id:Int!
+  type:String!
+  thumbnail:String!
+  location:String!
+  category:String!
+}
+input newVideoCategory{
+  video_id: ID!
+  category_id: ID!
+}
+
+input changeVideoDetail{
+  id:Int!
+  title:String!
+  descriptions:String!
+}
+
+type Mutation{
+  #comment
+  createNewComment(input:newComment): Comment!
+  removeComment(comment_id: Int!): Boolean!
+  editComment(comment_id:Int!, input:newComment): Comment!
+  likeComment(input:doLikeOrDislike!):Boolean!
+  dislikeComment(input:doLikeOrDislike!):Boolean!
+  replyComment(comment_id:Int!,input:newComment):Comment!
+
+  #playlist
+  createNewPlaylist(input:newPlaylist):Playlist!
+  addToPlaylist(input:addToPlaylist):Boolean!
+  removeFromPlaylist(input:addToPlaylist):Boolean!
+  editPlaylist(playlist_id:Int!, input:newPlaylist):Playlist!
+  increasePlaylistView(input:increaseView):Playlist!
+
+  #popular
+  addToPopularList(input:addToPlaylist):Boolean!
+  
+  #session
+  createNewSession(input:createNewSession):Session!
+  removeSession(session_id:Int!):Boolean!
+  restrictSession(session_id:Int!):Boolean!
+  changeSessionType(session_id:Int!, type:String!):Session!
+  addQueueToSession(input:addToQueue):Boolean!
+  removeQueueFromSession(input:addToQueue):Boolean!
+  
+  #subscribe
+  subscribe(input:newSubscription):Boolean!
+  unsubscribe(input:newSubscription):Boolean!
+  addNotification(input:newSubscription):Boolean!
+  unNotify(input:newSubscription):Boolean!
+
+  #uploadqueue
+  newUploadQueue(input:newUploadQueue):UploadQueue!
+  removeUploadQueue(uploadQueue_id:Int!):Boolean!
+  
+  #user
+  createNewUser(input:newUser):User!
+  changeProfilePicture(input:changePicture):User!
+  
+  changeMembership(input:newMembership):User!
+  cancelMembership(user_id:Int!):Boolean!
+  
+  #video
+  createNewVideo(input:newVideo):Video!
+  changeVideo(input:changeVideoDetail):Video!
+  likeVideo(input:doLikeOrDislike!):[Boolean!]!
+  dislikeVideo(input:doLikeOrDislike!):[Boolean!]!
+  increaseVideoView(input:increaseView):Video!
+
+  #tambahan
+  addNewPopularVideo(input:newPopularVideo):Boolean!
+  addNewCategoryVideo(input:newVideoCategory):Boolean!
+}

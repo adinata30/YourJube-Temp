@@ -1,0 +1,66 @@
+
+<app-side-bar></app-side-bar>
+<app-login-modal></app-login-modal>
+
+
+<div class="header">
+    <a (click)="callSideBar()"><img src = "../../assets/hamburger-btn.png" class="hamburger-icon"></a>
+    <a class="logo-a" href="#"><img src = "../../assets/yourjube-light.png" class="logo"></a>
+    
+    <div class="search-box" >
+        <div class="input-field"[@input]="focus ? 'focused' : 'idle'" >
+        <input class ="input" type="text" name="" class ="search-field" placeholder="Search"
+        (click)="turnInputField()" (focusout)="outfocus()">
+        </div>
+        <div class="search-button" [@click]="clicked ? 'clicked' : 'unclicked'" >
+           <fa-icon size="lg    " [icon]="faSearch" class="search-icon"></fa-icon>
+        </div>
+    </div>
+    
+    <!-- <img src ="../../assets/default-profile.png" class="profile-icon"> -->
+    <!-- <div  class="profile-btn" *ngIf="loggedIn; else guestMode"> -->
+        <img *ngIf="isLoggedIn.loggedIn"src ="../../assets/youtube-upload.png" class="upload-icon" [routerLink]="['upload']">
+        <img *ngIf="isLoggedIn.loggedIn" src ="../../assets/bell.png" class="bell-icon">
+        <img *ngIf="isLoggedIn.loggedIn" [src]="user.photoUrl" class = "profile-picture">
+        <!-- <a (click)= "login()">Sign In</a> -->
+    <!-- </div>  -->
+    <!-- <ng-template #guestMode> -->
+        <div class = "settings-container" *ngIf="isLoggedIn.loggedIn==false">
+            <fa-icon (click) ="toggleOpenClose() "[icon] = "faEllipsisV" size="lg" class="settings-btn"></fa-icon>
+            <div class="settings-detail" *ngIf="opened"[@openClose]>
+                <ul class="settings-items">
+                    <li>
+                        <fa-icon [icon] = "faMap" size="2x"></fa-icon>
+                        <select class="location-select">
+                            <option>Indonesia</option>
+                            <option>Malaysia</option>
+                            <option>Singapore</option>
+                            <option>United States</option>
+                            <option>United Kingdom</option>
+                            <option>Canada</option>
+                            <option>Germany</option>
+                            <option>Japan</option>
+                        </select>
+                    </li>
+                    <li>
+                        <fa-icon [icon] = "faKeyboard" size="2x"></fa-icon>
+                        <span> Keyboard Shortcut</span>
+                    </li>
+                    <li>
+                        <span style="top: 10px;">Restricted mode </span>
+                        <div class="restricted-toggler">
+                            <span class="restricted-bar" (click)="toggleRestrictedMode()"></span>
+                            <span class="restricted-button"(click)="toggleRestrictedMode()" [@restrict] = "restricted ? 'on':'off'"></span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div (click)= "callLoginModal()" class="sign-in-btn"*ngIf="isLoggedIn.loggedIn==false" >
+            <fa-icon [icon]="faUser" size="lg" class = "profile-icon"></fa-icon>
+            <a>Sign In</a>
+        </div> 
+    <!-- </ng-template> -->
+   
+</div>
+

@@ -1,0 +1,9 @@
+<div class="login-modal" *ngIf="toggled" [@toggleModal]>
+    <div class="fly-out" (click)="toggleFlyInOut()">
+
+    </div>
+    <div class="login-box" (click)="doLogin()">
+        <fa-icon [icon]="faGoogle" size="2x"></fa-icon>
+        <span>Login Using Google</span>
+    </div>
+</div>

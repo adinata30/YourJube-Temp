@@ -1,0 +1,27 @@
+<div class ="container" (mouseenter)="toggleElipsis()" (mouseleave)="toggleElipsis()">
+     <div class ="thumbnail">
+        <a><img [src]="thumbnail" alt=""></a>
+     </div>
+     <div class="profile">
+         <img [src]="pict" alt="">
+     </div>
+     <!-- <div class="title">
+        <a class="title">{{title}}</a>
+     </div> -->
+     <a class="title-text">{{title}}</a>
+     <div *ngIf="hovered" class="elipsis">
+      <fa-icon [icon]="elipsis"  ></fa-icon>
+     </div>
+     <div *ngIf="!hovered">
+
+     </div>
+     <div class="video-detail">
+        <a>{{name}}</a>
+        <a>{{showView}} &#x25CF; {{showDate}}</a>
+     </div>
+
+     
+     
+</div>
+
+<a>{{curLink}}</a>

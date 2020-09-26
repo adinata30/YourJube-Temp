@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "yourjube-a1cd0": {
+      "hosting": {
+        "YourJube": [
+          "yourjube-a1cd0"
+        ]
+      }
+    }
+  }
+}
